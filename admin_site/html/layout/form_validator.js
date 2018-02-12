@@ -102,7 +102,7 @@ $('.ui.form').form({
                     prompt:'Invalid number plate!'
                 },
                 {
-                    type:'regExp[/^K[A-Z]{2}[0-9]{3}[A-Z]{1}$/]',
+                    type:'regExp[/^K[A-Z]{2} ?[0-9]{3}[A-Z]{1}$/]',
                     prompt:'Invalid number plate!'
                 },
             ]
