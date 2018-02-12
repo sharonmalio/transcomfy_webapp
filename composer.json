@@ -1,0 +1,12 @@
+{
+    "name": "ara2/transcomfy",
+    "authors": [
+        {
+            "name": "sharon",
+            "email": "kaninimalio@gmail.com"
+        }
+    ],
+    "require": {
+        "kreait/firebase-php": "^3.0"
+    }
+}
