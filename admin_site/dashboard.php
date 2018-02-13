@@ -61,7 +61,22 @@
 
                     $sql="INSERT INTO `tbl_buses`(`plate`, `capacity`, `sacco_id`, `route_number`)
 VALUES ('".$_POST['sacco_bus_plate']."','".$_POST['sacco_bus_capacity']."','".$_SESSION['sacco_id']."','".$_POST['sacco_bus_route_number']."')";
-                    $db->insert($sql);
+                    
+                   $id = $db->insert($sql, true);
+
+                
+                    $database = $firebase->getDatabase();
+
+                    $newPost = $database
+                    ->getReference('buses/'.$id)
+                    ->set([
+                        'availableSpace'=>$_POST['sacco_bus_capacity'],
+                        'maxCapacity' => $_POST['sacco_bus_capacity'],
+                        'numberPlate' => $_POST['sacco_bus_plate'], 
+                        'route' => $_POST['sacco_bus_route_number']
+
+                    ]);
+
                     $_SESSION['flash_message']="You have successfully added the bus record.";
                     header('Location: index.php');
                 }
@@ -142,6 +157,17 @@ VALUES ('".$_POST['sacco_bus_plate']."','".$_POST['sacco_bus_capacity']."','".$_
 VALUES ('".$_SESSION['sacco_id']."','".$_POST['sacco_driver_first_name']."','".$_POST['sacco_driver_last_name']."','".$_POST['sacco_driver_phone_number']."','".$_POST['sacco_driver_email_address']."','".
                             password_hash($_POST['sacco_driver_first_name'].$_POST['sacco_driver_last_name'],PASSWORD_BCRYPT)."','".$_POST['sacco_driver_license']."',".true.")";
                         $driver_id=$db->insert($sql,true);
+
+                
+                   $database = $firebase->getDatabase();
+
+                   $newPost = $database
+                   ->getReference('drivers/'.$driver_id)
+                   ->set([
+                       'email'=>$_POST['sacco_driver_email_address'],
+                       'name' => $_POST['sacco_driver_first_name'].' '.$_POST['sacco_driver_last_name']
+  
+                   ]);
 
                         $sql= "UPDATE `tbl_drivers` SET `public_id`='".encrypt_id($driver_id)."' WHERE `driver_id`='".$driver_id."'";
                         $db->update($sql);
