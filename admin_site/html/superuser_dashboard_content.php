@@ -43,7 +43,7 @@
             </div>
         </div>
         <div class="twelve wide column">
-            <div class="ui active tab basic segment" data-tab="sacco_approve_admins" style="overflow-y: auto;">
+            <div class="ui active tab basic segment" data-tab="sacco_approve_admins">
                 <?php
                     if(isset($new_admins)){
                         echo "
@@ -97,7 +97,7 @@
                     }
                 ?>
             </div>
-            <div class="ui tab basic segment" data-tab="sacco_approve_sacco_deletion" style="overflow-y: auto;">
+            <div class="ui tab basic segment" data-tab="sacco_approve_sacco_deletion">
                 <?php
                 if(isset($deletion_saccos)){
                     echo "
@@ -143,7 +143,7 @@
                 }
                 ?>
             </div>
-            <div class="ui tab basic segment" data-tab="sacco_superuser_admins" style="overflow-y: auto;">
+            <div class="ui tab basic segment" data-tab="sacco_superuser_admins">
                 <table class="ui sortable single line celled table">
                     <thead>
                         <tr>
@@ -181,7 +181,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="ui basic tab segment" data-tab="sacco_superuser_finances" style="overflow-y: auto;">
+            <div class="ui basic tab segment" data-tab="sacco_superuser_finances">
                 <h3 class="ui green header">MPESA Transactions.</h3>
                 <table class="ui sortable single line celled table">
                     <thead>
@@ -237,7 +237,7 @@
                         <i class="user icon"></i>&nbsp;All registered drivers
                     </a>
                 </div>
-                <div class="ui basic active tab segment" data-tab="sacco_superuser_reports_buses" style="overflow-y: auto;">
+                <div class="ui basic active tab segment" data-tab="sacco_superuser_reports_buses">
                     <table class="ui sortable single line celled table">
                         <thead>
                             <tr>
@@ -276,7 +276,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="ui basic tab segment" data-tab="sacco_superuser_reports_saccos" style="overflow-y: auto;">
+                <div class="ui basic tab segment" data-tab="sacco_superuser_reports_saccos">
                     <table class="ui sortable single line celled table">
                         <thead>
                         <tr>
@@ -306,7 +306,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="ui basic tab segment" data-tab="sacco_superuser_reports_drivers" style="overflow-y: auto;">
+                <div class="ui basic tab segment" data-tab="sacco_superuser_reports_drivers">
                     <table class="ui sortable single line celled table">
                         <thead>
                         <tr>

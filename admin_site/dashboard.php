@@ -153,21 +153,42 @@ VALUES ('".$_POST['sacco_bus_plate']."','".$_POST['sacco_bus_capacity']."','".$_
                             return;
                         }
 
-                        $sql="INSERT INTO `tbl_drivers`(`sacco_id`, `first_name`, `last_name`, `phone_number`,`email_address`,`password`,`drivers_license`,`has_assigned_bus`)
-VALUES ('".$_SESSION['sacco_id']."','".$_POST['sacco_driver_first_name']."','".$_POST['sacco_driver_last_name']."','".$_POST['sacco_driver_phone_number']."','".$_POST['sacco_driver_email_address']."','".
+                        //create firebase account
+                        $newUser = $firebase->getAuth()->createUserWithEmailAndPassword($_POST['sacco_driver_email_address'], $_POST['sacco_driver_first_name'].$_POST['sacco_driver_last_name']);
+                        
+
+                        $sql="INSERT INTO `tbl_drivers`(`driver_id`,`sacco_id`, `first_name`, `last_name`, `phone_number`,`email_address`,`password`,`drivers_license`,`has_assigned_bus`)
+VALUES ('".$newUser->getUid()."','".$_SESSION['sacco_id']."','".$_POST['sacco_driver_first_name']."','".$_POST['sacco_driver_last_name']."','".$_POST['sacco_driver_phone_number']."','".$_POST['sacco_driver_email_address']."','".
                             password_hash($_POST['sacco_driver_first_name'].$_POST['sacco_driver_last_name'],PASSWORD_BCRYPT)."','".$_POST['sacco_driver_license']."',".true.")";
                         $driver_id=$db->insert($sql,true);
 
                 
-                   $database = $firebase->getDatabase();
+                        $database = $firebase->getDatabase();
 
-                   $newPost = $database
-                   ->getReference('drivers/'.$driver_id)
-                   ->set([
-                       'email'=>$_POST['sacco_driver_email_address'],
-                       'name' => $_POST['sacco_driver_first_name'].' '.$_POST['sacco_driver_last_name']
-  
-                   ]);
+                        $newPost = $database
+                        ->getReference('drivers/'.$driver_id)
+                        ->set([
+                            'email'=>$_POST['sacco_driver_email_address'],
+                            'name' => $_POST['sacco_driver_first_name'].' '.$_POST['sacco_driver_last_name']
+        
+                        ]);
+                        
+                        if ($_POST['sacco_assigned_bus'] != NULL) {
+                            $bus = $firebase->getDatabase()->getReference('buses/'.$_POST['sacco_assigned_bus'])->getSnapShot();
+
+
+                            $firebase->getDatabase()->getReference('buses/'.$bus->getKey())
+                            ->update([
+                                'driverId'=>$driver_id
+                            ]);
+
+                            $firebase->getDatabase()->getReference('drivers/'.$driver_id)
+                            ->update([
+                                'bus'=>$bus->getValue()
+                            ]);
+                        }
+
+                        
 
                         $sql= "UPDATE `tbl_drivers` SET `public_id`='".encrypt_id($driver_id)."' WHERE `driver_id`='".$driver_id."'";
                         $db->update($sql);
@@ -321,21 +342,21 @@ SET `first_name`='".$_POST['admin_first_name']."',`last_name`='".$_POST['admin_l
                 $sql="SELECT `id`,`plate`, `capacity`, `route_number`, `assigned_driver`, `status` FROM `tbl_buses` WHERE `sacco_id`='".$_SESSION['sacco_id']."'";
                 $sacco_buses=$db->select($sql);
 
-                $fb_database = $firebase->getDatabase();
-                $reference = $fb_database->getReference('buses');
-                $snapshot = $reference->getSnapshot();
-                $fetched_buses = $snapshot->getValue();
-                $sacco_buses = [];
-                foreach($fetched_buses as $key => $value){
-                    $bus = [];
-                    $bus['capacity'] = $value['maxCapacity'];
-                    $bus['plate'] = $value['numberPlate'];
-                    $bus['route_number'] = '0';
-                    $bus['assigned_driver'] = $value['driverId'];
-                    $bus['id'] = $key;
-                    $bus['status'] = 'Enabled';
-                    array_push($sacco_buses, (object)$bus);
-                }
+                // $fb_database = $firebase->getDatabase();
+                // $reference = $fb_database->getReference('buses');
+                // $snapshot = $reference->getSnapshot();
+                // $fetched_buses = $snapshot->getValue();
+                // $sacco_buses = [];
+                // foreach($fetched_buses as $key => $value){
+                //     $bus = [];
+                //     $bus['capacity'] = $value['maxCapacity'];
+                //     $bus['plate'] = $value['numberPlate'];
+                //     $bus['route_number'] = $_POST['sacco_bus_route_number'];
+                //     $bus['assigned_driver'] = $value['driverId'];
+                //     $bus['id'] = $key;
+                //     $bus['status'] = 'Enabled';
+                //     array_push($sacco_buses, (object)$bus);
+                // }
                 // print_r($sacco_buses);
                 // exit;
 

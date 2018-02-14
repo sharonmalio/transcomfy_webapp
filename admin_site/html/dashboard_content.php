@@ -54,7 +54,7 @@
                         </div>
                     </form>
                 </div>
-                <div class="ui basic tab segment" data-tab="sacco_buses_list" style="overflow-y: auto;">
+                <div class="ui basic tab segment" data-tab="sacco_buses_list">
                     <div class="ui large brown label" >Total sacco buses :&nbsp;<?php echo isset($sacco_buses)?count($sacco_buses):0?></div>
                     <table class="ui sortable single line celled center aligned small table">
                         <thead>
@@ -198,7 +198,7 @@
                         </div>
                     </form>
                 </div>
-                <div class="ui tab basic segment" data-tab="sacco_drivers_list" style="overflow-y: auto;">
+                <div class="ui tab basic segment" data-tab="sacco_drivers_list">
                     <div class="ui large brown label" >Total sacco drivers :&nbsp;<?php echo isset($sacco_drivers)?count($sacco_drivers):0?></div>
                     <table class="ui sortable single line celled center aligned small table">
                         <thead>
@@ -248,7 +248,7 @@
                                                     </div>
                                                 </form>
                                             </td>
-                                            <td><a class='ui mini teal button' style='margin-bottom:13px;' href='/Transcomfy/admin_site/driver_reviews.php?id=$sacco_driver->public_id'>Reviews</a></td>
+                                            <td><a class='ui mini teal button' href='/Transcomfy/admin_site/driver_reviews.php?id=$sacco_driver->public_id'>Reviews</a></td>
                                          </tr>";
                                 }
                             }
