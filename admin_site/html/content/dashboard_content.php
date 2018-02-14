@@ -1,7 +1,7 @@
 <div class="ui brown very padded raised segment">
     <center>
         <div class="ui centered small image" >
-            <img src="static/images/app_logo.jpg">
+            <img src="static/images/app_logo.JPG">
         </div>
     </center>
     <div class="ui brown center aligned huge dividing header"><?php echo isset($sacco_name)?$sacco_name:"" ?> administration dashboard.</div>

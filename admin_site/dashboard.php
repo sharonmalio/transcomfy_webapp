@@ -70,13 +70,17 @@ VALUES ('" . $_POST['sacco_bus_plate'] . "','" . $_POST['sacco_bus_capacity'] . 
 
                 $database = $firebase->getDatabase();
 
+                $available_space = (int) $_POST['sacco_bus_capacity'];
+                $max_capacity = (int) $_POST['sacco_bus_capacity'];
+            
                 $newPost = $database
                     ->getReference('buses/' . $id)
                     ->set([
-                        'availableSpace' => $_POST['sacco_bus_capacity'],
-                        'maxCapacity' => $_POST['sacco_bus_capacity'],
+                        'availableSpace' => $available_space,
+                        'maxCapacity' => $max_capacity,
                         'numberPlate' => $_POST['sacco_bus_plate'],
-                        'route' => $_POST['sacco_bus_route_number']
+                        'route' => $_POST['sacco_bus_route_number'],
+                        'saccoId' => $_SESSION['sacco_id']
 
                     ]);
 
@@ -188,14 +192,17 @@ VALUES ('" . $newUser->getUid() . "','" . $_SESSION['sacco_id'] . "','" . $_POST
                         $driver_id = $db->insert($sql, true);
 
 
-
                         $sql = "UPDATE `tbl_drivers` SET `public_id`='" . encrypt_id($driver_id) . "' WHERE `driver_id`='" . $driver_id . "'";
                         $db->update($sql);
 
-                        $sql = "UPDATE `tbl_buses` SET `assigned_driver`= '" . $driver_id . "' WHERE `id`='" . $_POST['sacco_assigned_bus'] . "'";
+                        $sql = "UPDATE `tbl_buses` SET `assigned_driver`= '" . $newUser->getUid(). "' WHERE `id`='" . $_POST['sacco_assigned_bus'] . "'";
                         $db->update($sql);
 
-                    // Get cURL resource
+        //                 //inserting into table transactions
+        // $sql="INSERT INTO `tbl_transactions`(`id`, `sacco_id`, `amount`, `user_id`, `user_name`, `route_number`)
+        // VALUES ('" . $_SESSION['sacco_id']. "','" . $_POST['amount']. "','" .$newUser->getUid()."','".$_POST['user_name']."','" .$_POST['route_number'] . "','" . 
+                  
+                  // Get cURL resource
                     $curl = curl_init();
                     // Set some options - we are passing in a useragent too here
                     curl_setopt_array($curl, array(

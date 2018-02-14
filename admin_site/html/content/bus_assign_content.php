@@ -4,7 +4,7 @@
         <div class="ui brown very padded raised segment">
             <center>
                 <div class="ui centered small image" >
-                    <img src="static/images/app_logo.jpg">
+                    <img src="static/images/app_logo.JPG">
                 </div>
             </center>
             <div class="ui large brown center aligned header">Assign driver form.</div>

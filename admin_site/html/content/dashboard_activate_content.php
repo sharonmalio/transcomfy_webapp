@@ -4,7 +4,7 @@
         <div class="ui raised very padded brown segment">
             <center>
                 <div class="ui centered small image" >
-                    <img src="static/images/app_logo.jpg">
+                    <img src="static/images/app_logo.JPG">
                 </div>
             </center>
             <div class="ui brown center aligned header">

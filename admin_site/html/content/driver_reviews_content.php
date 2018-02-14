@@ -2,7 +2,7 @@
     <a href="dashboard.php" class="ui green right floated icon button"><i class="arrow left icon"></i>&nbsp;Go back to dashboard</a>
     <center>
         <div class="ui centered small image" >
-            <img src="static/images/app_logo.jpg">
+            <img src="static/images/app_logo.JPG">
         </div>
     </center>
     <div class="ui brown center aligned header">Sacco driver reviews report.</div>
