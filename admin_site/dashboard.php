@@ -182,10 +182,6 @@ VALUES ('" . $_POST['sacco_bus_plate'] . "','" . $_POST['sacco_bus_capacity'] . 
                         return;
                     }
 
-                    create firebase account
-
-
-
                         $sql = "INSERT INTO `tbl_drivers`(`driver_id`,`sacco_id`, `first_name`, `last_name`, `phone_number`,`email_address`,`password`,`drivers_license`,`has_assigned_bus`)
 VALUES ('" . $newUser->getUid() . "','" . $_SESSION['sacco_id'] . "','" . $_POST['sacco_driver_first_name'] . "','" . $_POST['sacco_driver_last_name'] . "','" . $_POST['sacco_driver_phone_number'] . "','" . $_POST['sacco_driver_email_address'] . "','" .
                             password_hash($_POST['sacco_driver_first_name'] . $_POST['sacco_driver_last_name'], PASSWORD_BCRYPT) . "','" . $_POST['sacco_driver_license'] . "'," . true . ")";
