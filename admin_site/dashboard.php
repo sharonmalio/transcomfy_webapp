@@ -158,46 +158,46 @@ VALUES ('" . $_POST['sacco_bus_plate'] . "','" . $_POST['sacco_bus_capacity'] . 
                 }
                 if (isset($_POST['sacco_assigned_bus']) && !empty($_POST['sacco_assigned_bus'])) {
 
-//                        $sql="SELECT `phone_number` FROM `tbl_drivers` WHERE `phone_number`='".$_POST['sacco_driver_phone_number']."'";
-//                        $existing_phone_number=$db->select($sql);
-//                        if($existing_phone_number){
-//                            $_SESSION['negative_flash_message']="A driver with the submitted phone number already exists.";
-//                            header('Location: index.php');
-//                            return;
-//                        }
-//
-//                        $sql="SELECT `email_address` FROM `tbl_drivers` WHERE `email_address`='".$_POST['sacco_driver_email_address']."'";
-//                        $existing_email_address=$db->select($sql);
-//                        if($existing_email_address){
-//                            $_SESSION['negative_flash_message']="A driver with the submitted email address already exists.";
-//                            header('Location: index.php');
-//                            return;
-//                        }
-//
-//                        $sql="SELECT `drivers_license` FROM `tbl_drivers` WHERE `drivers_license`='".$_POST['sacco_driver_license']."'";
-//                        $existing_driver_license=$db->select($sql);
-//                        if($existing_driver_license){
-//                            $_SESSION['negative_flash_message']="A driver with the submitted driver license already exists.";
-//                            header('Location: index.php');
-//                            return;
-//                        }
+                    $sql = "SELECT `phone_number` FROM `tbl_drivers` WHERE `phone_number`='" . $_POST['sacco_driver_phone_number'] . "'";
+                    $existing_phone_number = $db->select($sql);
+                    if ($existing_phone_number) {
+                        $_SESSION['negative_flash_message'] = "A driver with the submitted phone number already exists.";
+                        header('Location: index.php');
+                        return;
+                    }
 
-                    //create firebase account
+                    $sql = "SELECT `email_address` FROM `tbl_drivers` WHERE `email_address`='" . $_POST['sacco_driver_email_address'] . "'";
+                    $existing_email_address = $db->select($sql);
+                    if ($existing_email_address) {
+                        $_SESSION['negative_flash_message'] = "A driver with the submitted email address already exists.";
+                        header('Location: index.php');
+                        return;
+                    }
 
+                    $sql = "SELECT `drivers_license` FROM `tbl_drivers` WHERE `drivers_license`='" . $_POST['sacco_driver_license'] . "'";
+                    $existing_driver_license = $db->select($sql);
+                    if ($existing_driver_license) {
+                        $_SESSION['negative_flash_message'] = "A driver with the submitted driver license already exists.";
+                        header('Location: index.php');
+                        return;
+                    }
 
-
-//                        $sql="INSERT INTO `tbl_drivers`(`driver_id`,`sacco_id`, `first_name`, `last_name`, `phone_number`,`email_address`,`password`,`drivers_license`,`has_assigned_bus`)
-//VALUES ('".$newUser->getUid()."','".$_SESSION['sacco_id']."','".$_POST['sacco_driver_first_name']."','".$_POST['sacco_driver_last_name']."','".$_POST['sacco_driver_phone_number']."','".$_POST['sacco_driver_email_address']."','".
-//                            password_hash($_POST['sacco_driver_first_name'].$_POST['sacco_driver_last_name'],PASSWORD_BCRYPT)."','".$_POST['sacco_driver_license']."',".true.")";
-//                        $driver_id=$db->insert($sql,true);
+                    create firebase account
 
 
 
-//                        $sql= "UPDATE `tbl_drivers` SET `public_id`='".encrypt_id($driver_id)."' WHERE `driver_id`='".$driver_id."'";
-//                        $db->update($sql);
-//
-//                        $sql = "UPDATE `tbl_buses` SET `assigned_driver`= '".$driver_id."' WHERE `id`='".$_POST['sacco_assigned_bus']."'";
-//                        $db->update($sql);
+                        $sql = "INSERT INTO `tbl_drivers`(`driver_id`,`sacco_id`, `first_name`, `last_name`, `phone_number`,`email_address`,`password`,`drivers_license`,`has_assigned_bus`)
+VALUES ('" . $newUser->getUid() . "','" . $_SESSION['sacco_id'] . "','" . $_POST['sacco_driver_first_name'] . "','" . $_POST['sacco_driver_last_name'] . "','" . $_POST['sacco_driver_phone_number'] . "','" . $_POST['sacco_driver_email_address'] . "','" .
+                            password_hash($_POST['sacco_driver_first_name'] . $_POST['sacco_driver_last_name'], PASSWORD_BCRYPT) . "','" . $_POST['sacco_driver_license'] . "'," . true . ")";
+                        $driver_id = $db->insert($sql, true);
+
+
+
+                        $sql = "UPDATE `tbl_drivers` SET `public_id`='" . encrypt_id($driver_id) . "' WHERE `driver_id`='" . $driver_id . "'";
+                        $db->update($sql);
+
+                        $sql = "UPDATE `tbl_buses` SET `assigned_driver`= '" . $driver_id . "' WHERE `id`='" . $_POST['sacco_assigned_bus'] . "'";
+                        $db->update($sql);
 
                     // Get cURL resource
                     $curl = curl_init();
@@ -217,37 +217,37 @@ VALUES ('" . $_POST['sacco_bus_plate'] . "','" . $_POST['sacco_bus_capacity'] . 
                     //var_dump($_POST);
 
                 } else {
-//                    $sql = "SELECT `phone_number` FROM `tbl_drivers` WHERE `phone_number`='" . $_POST['sacco_driver_phone_number'] . "'";
-//                    $existing_phone_number = $db->select($sql);
-//                    if ($existing_phone_number) {
-//                        $_SESSION['negative_flash_message'] = "A driver with the submitted phone number already exists.";
-//                        header('Location: index.php');
-//                        return;
-//                    }
-//
-//                    $sql = "SELECT `email_address` FROM `tbl_drivers` WHERE `email_address`='" . $_POST['sacco_driver_email_address'] . "'";
-//                    $existing_email_address = $db->select($sql);
-//                    if ($existing_email_address) {
-//                        $_SESSION['negative_flash_message'] = "A driver with the submitted email address already exists.";
-//                        header('Location: index.php');
-//                        return;
-//                    }
-//
-//                    $sql = "SELECT `drivers_license` FROM `tbl_drivers` WHERE `drivers_license`='" . $_POST['sacco_driver_license'] . "'";
-//                    $existing_driver_license = $db->select($sql);
-//                    if ($existing_driver_license) {
-//                        $_SESSION['negative_flash_message'] = "A driver with the submitted driver license already exists.";
-//                        header('Location: index.php');
-//                        return;
-//                    }
-//
-//                    $sql = "INSERT INTO `tbl_drivers`(`sacco_id`, `first_name`, `last_name`, `phone_number`,`email_address`,`password`,`drivers_license`,`has_assigned_bus`)
-//VALUES ('" . $_SESSION['sacco_id'] . "','" . $_POST['sacco_driver_first_name'] . "','" . $_POST['sacco_driver_last_name'] . "','" . $_POST['sacco_driver_phone_number'] . "','" . $_POST['sacco_driver_email_address'] . "','" .
-//                        password_hash($_POST['sacco_driver_first_name'] . $_POST['sacco_driver_last_name'], PASSWORD_BCRYPT) . "','" . $_POST['sacco_driver_license'] . "',NULL)";
-//                    $driver_id = $db->insert($sql, true);
-//
-//                    $sql = "UPDATE `tbl_drivers` SET `public_id`='" . encrypt_id($driver_id) . "' WHERE `driver_id`='" . $driver_id . "'";
-//                    $db->update($sql);
+                    $sql = "SELECT `phone_number` FROM `tbl_drivers` WHERE `phone_number`='" . $_POST['sacco_driver_phone_number'] . "'";
+                    $existing_phone_number = $db->select($sql);
+                    if ($existing_phone_number) {
+                        $_SESSION['negative_flash_message'] = "A driver with the submitted phone number already exists.";
+                        header('Location: index.php');
+                        return;
+                    }
+
+                    $sql = "SELECT `email_address` FROM `tbl_drivers` WHERE `email_address`='" . $_POST['sacco_driver_email_address'] . "'";
+                    $existing_email_address = $db->select($sql);
+                    if ($existing_email_address) {
+                        $_SESSION['negative_flash_message'] = "A driver with the submitted email address already exists.";
+                        header('Location: index.php');
+                        return;
+                    }
+
+                    $sql = "SELECT `drivers_license` FROM `tbl_drivers` WHERE `drivers_license`='" . $_POST['sacco_driver_license'] . "'";
+                    $existing_driver_license = $db->select($sql);
+                    if ($existing_driver_license) {
+                        $_SESSION['negative_flash_message'] = "A driver with the submitted driver license already exists.";
+                        header('Location: index.php');
+                        return;
+                    }
+
+                    $sql = "INSERT INTO `tbl_drivers`(`sacco_id`, `first_name`, `last_name`, `phone_number`,`email_address`,`password`,`drivers_license`,`has_assigned_bus`)
+VALUES ('" . $_SESSION['sacco_id'] . "','" . $_POST['sacco_driver_first_name'] . "','" . $_POST['sacco_driver_last_name'] . "','" . $_POST['sacco_driver_phone_number'] . "','" . $_POST['sacco_driver_email_address'] . "','" .
+                        password_hash($_POST['sacco_driver_first_name'] . $_POST['sacco_driver_last_name'], PASSWORD_BCRYPT) . "','" . $_POST['sacco_driver_license'] . "',NULL)";
+                    $driver_id = $db->insert($sql, true);
+
+                    $sql = "UPDATE `tbl_drivers` SET `public_id`='" . encrypt_id($driver_id) . "' WHERE `driver_id`='" . $driver_id . "'";
+                    $db->update($sql);
 
                     // Get cURL resource
                     $curl = curl_init();
@@ -345,23 +345,6 @@ SET `first_name`='" . $_POST['admin_first_name'] . "',`last_name`='" . $_POST['a
             $sql = "SELECT `id`,`plate`, `capacity`, `route_number`, `assigned_driver`, `status` FROM `tbl_buses` WHERE `sacco_id`='" . $_SESSION['sacco_id'] . "'";
             $sacco_buses = $db->select($sql);
 
-            // $fb_database = $firebase->getDatabase();
-            // $reference = $fb_database->getReference('buses');
-            // $snapshot = $reference->getSnapshot();
-            // $fetched_buses = $snapshot->getValue();
-            // $sacco_buses = [];
-            // foreach($fetched_buses as $key => $value){
-            //     $bus = [];
-            //     $bus['capacity'] = $value['maxCapacity'];
-            //     $bus['plate'] = $value['numberPlate'];
-            //     $bus['route_number'] = $_POST['sacco_bus_route_number'];
-            //     $bus['assigned_driver'] = $value['driverId'];
-            //     $bus['id'] = $key;
-            //     $bus['status'] = 'Enabled';
-            //     array_push($sacco_buses, (object)$bus);
-            // }
-            // print_r($sacco_buses);
-            // exit;
 
             $sql = "SELECT `driver_id`,`first_name`, `last_name`, `phone_number`, `drivers_license`,`has_assigned_bus`,`public_id`,`email_address` FROM `tbl_drivers` WHERE `sacco_id`='" . $_SESSION['sacco_id'] . "'";
             $sacco_drivers = $db->select($sql);
